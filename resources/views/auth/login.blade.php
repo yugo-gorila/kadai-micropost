@@ -18,7 +18,7 @@
                 {!! Form::password("password",["class" => "form-control"]) !!}
             </div>
             
-            {!! Form::submit("Log in",["class", => "btn btn-primary btn block"]) !!}
+            {!! Form::submit("Log in",["class" => "btn btn-primary btn block"]) !!}
          {!! Form::close() !!}
          
          {{--ユーザページ登録へのリンク--}}
