@@ -12,6 +12,6 @@ class Micropost extends Model
      */
      public function user() 
      {
-         return $this->belongsTo(user::lass);
+         return $this->belongsTo(user::class);
      }
 }
