@@ -29,6 +29,7 @@ class UsersController extends Controller
         // ユーザ詳細ビューでそれを表示
         return view("users.show",[
             "user" => $user,
+            "microposts" => $microposts
         ]);
         
     }
@@ -52,6 +53,10 @@ class UsersController extends Controller
               "user" => $user,
               "users" => $followings,
              ]);
+     }
+     public function favoriting($id)
+     {
+         
      }
      /**
      * ユーザのフォロワー一覧ページを表示するアクション。

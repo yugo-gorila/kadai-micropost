@@ -127,12 +127,47 @@ class User extends Authenticatable
          // それらのユーザが所有する投稿に絞り込む
          return Micropost::whereIn("user_id",$userIds);
      }
+     //追加
+     public function favorites()
+     {
+         return $this->belongsToMany(Micropost::class,"favorites","user_id","micropost_id")->withTimestamps();
+         
+     }
+     public function favorite($micropost_id)
+     {
+         // すでにお気に入りしているかの確認
+         $exit = $this->is_favorite($micropost_id);
+         // 対象が自分自身かどうかの確認
+        
+         if($exit) {
+             return false;
+         }else{
+             $this->favorites()->attach($micropost_id);
+             return true;
+         }
+     }
+     public function unfavorite($micropost_id)
+     {
+         $exit = $this->is_favorite($micropost_id);
+        
+         
+         if($exit) {
+             $this->favorites()->detach($micropost_id);
+             return true;
+         }else{
+             return false;
+         }
+     }
+     public function is_favorite($micropost_id)
+     {
+         return $this->favorites()->where("micropost_id",$micropost_id)->exit();
+     }
      /**
      * このユーザに関係するモデルの件数をロードする。
      */
      public function loadRelationshipCounts()
      {
-         $this->loadCount("microposts","followings","followers");
+         $this->loadCount("microposts","followings","followers","favorites");
      }
 }
 
