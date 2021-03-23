@@ -1,4 +1,4 @@
-@if (count($microposts) > 0)
+@if (count($microposts) > 0 )
     <ul class="list-unstyled">
         @foreach ($microposts as $micropost)
             <li class="media mb-3">
